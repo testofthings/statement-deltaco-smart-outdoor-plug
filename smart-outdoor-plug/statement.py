@@ -48,7 +48,6 @@ smart_plug >> tencent / TCP(port=443)
 smart_plug >> tuya_3 / TLS(auth=True)
 smart_plug >> tuya_4 / TLS(auth=True, port=8886)
 smart_plug >> aws_iot_dns / TLS(auth=True)
-# TODO; DEVICE SENDS IPDC TO MOBILE APP !!
 
 # Defining connections from the mobile application
 mobile_app >> udp_broadcast_2
