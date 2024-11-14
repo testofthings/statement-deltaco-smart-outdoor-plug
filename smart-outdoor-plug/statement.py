@@ -33,7 +33,7 @@ tuya_3 = system.backend("Tuya Smart 3").serve(TLS(auth=True)).dns("a3.tuyaeu.com
 tuya_4 = system.backend("Tuya Smart 4").serve(TLS(auth=True, port=8886)).dns("m2.tuyaeu.com") # 3.66.126.37
 tuya_images = system.backend("Tuya Images").serve().dns("images.tuyaeu.com") # 3.164.68.75, djivuyxezwp4s.cloudfront.net
 aws = system.backend("AWS").serve(TLS(auth=True)).dns("euimagesd2h2yqnfpu4gl5.cdn5th.com") # 18.165.122.35, ...
-aws_iot_dns = system.backend("AWS IoT DNS").serve(TLS(auth=True)).dns("h3.iot-dns.com") # 76.223.21.194
+iot_dns = system.backend("IoT DNS").serve(TLS(auth=True)).dns("h3.iot-dns.com") # 76.223.21.194
 tencent = system.backend("Tencent Cloud Computing").serve(TCP(port=443)).dns("tencent.com") # Did not respond # 162.14.14.21
 
 # Defining connections by the environment
@@ -47,7 +47,7 @@ smart_plug >> mobile_app / ARP
 smart_plug >> tencent / TCP(port=443)
 smart_plug >> tuya_3 / TLS(auth=True)
 smart_plug >> tuya_4 / TLS(auth=True, port=8886)
-smart_plug >> aws_iot_dns / TLS(auth=True)
+smart_plug >> iot_dns / TLS(auth=True)
 
 # Defining connections from the mobile application
 mobile_app >> udp_broadcast_2
