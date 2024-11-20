@@ -60,6 +60,13 @@ mobile_app >> tuya_2 / TLS(port=8883)
 mobile_app >> tuya_images / TLS
 mobile_app >> aws / TLS
 
+# Define privacy and security policies
+system.online_resource("privacy-policy", url="https://aurdel.com/fi/en/privacy-policy")
+system.online_resource("security-policy", url="") # None found
+
+# Define collected sensitive data
+system.data(["User e-mail"])
+
 
 if __name__ == '__main__':
     system.run()
