@@ -65,7 +65,7 @@ system.online_resource("privacy-policy", url="https://aurdel.com/fi/en/privacy-p
 system.online_resource("security-policy", url="") # None found
 
 # Define collected sensitive data
-system.data(["User e-mail"])
+system.data(["User e-mail", "WiFi SSID", "WiFi password"])
 
 
 if __name__ == '__main__':
