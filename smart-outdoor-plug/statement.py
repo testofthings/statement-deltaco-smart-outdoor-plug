@@ -2,7 +2,7 @@
 # pylint: disable=pointless-statement
 # pylint: disable=expression-not-assigned
 
-from tdsaf.main import Builder, TLS, DNS, UDP, ARP, EAPOL, ICMP, TCP
+from tdsaf.main import Builder, TLS, DNS, UDP, ARP, EAPOL, ICMP, TCP, HTTP
 from tdsaf.common.android import (
     LOCATION, BLUETOOTH, ADMINISTRATIVE, UNCATEGORIZED,
     NETWORK, RECORDING, STORAGE
@@ -37,7 +37,7 @@ udp_broadcast_3 = system.broadcast(UDP(port=30011)) # All zeros
 udp_broadcast_4 = system.broadcast(UDP(port=30012)) # All zeros
 
 # Defining relevant backend services
-tuya_1 = system.backend("Tuya Smart 1").serve(TLS).dns("a1.tuyaeu.com") #18.193.211.120
+tuya_1 = system.backend("Tuya Smart 1").serve(TLS, HTTP).dns("a1.tuyaeu.com") #18.193.211.120
 tuya_2 = system.backend("Tuya Smart 2").serve(TLS(port=8883)).dns("m1.tuyaeu.com") #18.194.10.142
 tuya_3 = system.backend("Tuya Smart 3").serve(TLS).dns("a3.tuyaeu.com") # 3.121.131.36
 tuya_4 = system.backend("Tuya Smart 4").serve(TLS(port=8886)).dns("m2.tuyaeu.com") # 3.66.126.37
@@ -71,8 +71,14 @@ mobile_app >> tuya_images / TLS
 mobile_app >> aws / TLS
 
 # Define privacy and security policies
-system.online_resource("privacy-policy", url="https://aurdel.com/fi/en/privacy-policy")
-system.online_resource("security-policy", url="") # None found
+system.online_resource("privacy-policy", url="https://aurdel.com/fi/en/privacy-policy", keywords=[
+    "privacy policy", "personal data", "consent", "terms", "third party"
+])
+system.online_resource("cookie-policy", url="https://aurdel.com/fi/en/cookie-policy", keywords=[
+    "cookie policy", "stored", "delete", "personal data", "expiry"
+])
+
+# No security policy found
 
 # Define collected sensitive data
 system.data(["User e-mail", "WiFi SSID", "WiFi password"])
