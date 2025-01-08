@@ -42,9 +42,12 @@ tuya_2 = system.backend("Tuya Smart 2").serve(TLS(port=8883), TLS, MQTT).dns("m1
 tuya_3 = system.backend("Tuya Smart 3").serve(TLS).dns("a3.tuyaeu.com") # 3.121.131.36
 tuya_4 = system.backend("Tuya Smart 4").serve(TLS(port=8886)).dns("m2.tuyaeu.com") # 3.66.126.37 # Not found by shodan
 tuya_images = system.backend("Tuya Images").serve().dns("images.tuyaeu.com").dns("djivuyxezwp4s.cloudfront.net") # 3.164.68.75, not found by shodan
-aws = system.backend("AWS").serve(TLS).dns("euimagesd2h2yqnfpu4gl5.cdn5th.com") # 18.165.122.35, ... #not found by shodan
-iot_dns = system.backend("IoT DNS").serve(TLS).dns("h3.iot-dns.com") # 76.223.21.194 # not found by shodan
+aws = system.backend("AWS").serve(TLS, HTTP).dns("euimagesd2h2yqnfpu4gl5.cdn5th.com").dns("d46e0u663bkjg.cloudfront.net") # 18.165.122.35, ...
+iot_dns = system.backend("IoT DNS").serve(TLS).dns("h3.iot-dns.com") # 76.223.21.194
 tencent = system.backend("Tencent Cloud Computing").serve(TCP(port=443)).dns("tencent.com") # Did not respond # 162.14.14.21
+
+# Defining backend service SBOM
+aws.software().sbom(["amazon_cloudfront"])
 
 # Defining connections by the environment
 any_host >> smart_plug / ARP / EAPOL / ICMP
