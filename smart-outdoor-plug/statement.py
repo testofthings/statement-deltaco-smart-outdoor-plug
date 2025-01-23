@@ -2,8 +2,8 @@
 # pylint: disable=pointless-statement
 # pylint: disable=expression-not-assigned
 
-from tdsaf.main import Builder, TLS, DNS, UDP, ARP, EAPOL, ICMP, TCP, HTTP, MQTT
-from tdsaf.common.android import (
+from toolsaf.main import Builder, TLS, DNS, UDP, ARP, EAPOL, ICMP, TCP, HTTP, MQTT
+from toolsaf.common.android import (
     LOCATION, BLUETOOTH, ADMINISTRATIVE, UNCATEGORIZED,
     NETWORK, RECORDING, STORAGE
 )
