@@ -1,7 +1,16 @@
 # Security Statement: Deltaco Smart Outdoor Plug
-This repository contains our security statement for the Deltaco Smart Outdoor Plug.
+| ⚠  Note | This is an unofficial security statement not endorsed by the manufacturer. |
+|---------|--------------------------------|
 
-The statement was created based on data collected with `nmap` and `tcpdump`.
+Security statement for the Deltaco Smart Outdoor Plug.
+
+## Security Statements
+Security statements are descriptions of the security posture of IoT devices or products. For more information on security statements and relevant tools, see the [Toolsaf](https://github.com/testofthings/toolsaf) framework.
+
+Once you have set up Toolsaf, you can run the statement with:
+```shell
+python smart-outdoor-plug/statement.py
+```
 
 ## Device Description
 The Deltaco Smart Outdoor Plug is an electrical plug that can be controlled with a mobile application.
@@ -11,10 +20,14 @@ Fig. The device
 
 The device's companion mobile application can be found [here](https://play.google.com/store/apps/details?id=com.deltaco.smarthome).
 
-## Findings
+# Toolsaf Diagram
+Toolsaf creates the following visualization for the statement:
 
+<img src="Smart_Outdoor_Plug_diagram.png" width="40%" alt="Deltaco Smart Outdoor Plug diagram"></br>
+
+## Findings
 ### Ports
-The device had the following ports open:
+An nmap scan performed on the device found the following ports:
 | Protocol | ID | State |
 |----------|----|-------|
 | TCP | 6668 | Open |
@@ -22,7 +35,6 @@ The device had the following ports open:
 
 ### Notable Connections
 The device and/or mobile application connect to these backends:
-
 | Note | URL / IP |
 |------|----------|
 | Tuya Smart Services       | `a1.tuyaeu.com`, `m1.tuyaeu.com`, `a2.tuyaeu.com`, `m2.tuyaeu.com`, `images.tuyaeu.com` |
@@ -30,11 +42,5 @@ The device and/or mobile application connect to these backends:
 | AWS                       | `euimagesd2h2yqnfpu4gl5.cdn5th.com` |
 | Tencent Cloud Computing   | `162.14.14.21` |
 
-### Sample Data
-Sample data for this security statement can be found [here](https://github.com/testofthings/sample-data/deltaco-smart-outdoor-plug).
-
-## Running the Statement
-First create a Python virtual environment and install TDSAF, then run with:
-```shell
-python3 smart-outdoor-plug/statement.py -r ../sample-data/deltaco-smart-outdoor-plug
-```
+## Known Issues
+* This statement is likely incomplete.
