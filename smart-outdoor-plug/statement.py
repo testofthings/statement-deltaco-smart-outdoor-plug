@@ -31,10 +31,15 @@ mobile_app.set_permissions(
 )
 
 # Defining broadcasts
-udp_broadcast_1 = system.broadcast(UDP(port=6667))
-udp_broadcast_2 = system.broadcast(UDP(port=7000)) # Some data
-udp_broadcast_3 = system.broadcast(UDP(port=30011)) # All zeros
-udp_broadcast_4 = system.broadcast(UDP(port=30012)) # All zeros
+udp_broadcast_1 = smart_plug.broadcast(UDP(port=6667))
+mobile_app << udp_broadcast_1
+
+udp_broadcast_2 = mobile_app.broadcast(UDP(port=7000))  # Some data
+udp_broadcast_3 = mobile_app.broadcast(UDP(port=30011)) # All zeros
+udp_broadcast_4 = mobile_app.broadcast(UDP(port=30012)) # All zeros
+smart_plug << udp_broadcast_2
+smart_plug << udp_broadcast_3
+smart_plug << udp_broadcast_4
 
 # Defining relevant backend services
 tuya_1 = system.backend("Tuya Smart 1").serve(TLS, HTTP).dns("a1.tuyaeu.com") #18.193.211.120
@@ -55,7 +60,6 @@ any_host >> mobile_app / ARP
 
 # Defining connections from the device
 smart_plug >> any_host / DNS / ICMP
-smart_plug >> udp_broadcast_1
 smart_plug >> mobile_app / ARP
 smart_plug >> tencent / TCP(port=443)
 smart_plug >> tuya_3 / TLS
@@ -63,9 +67,6 @@ smart_plug >> tuya_4 / TLS(port=8886)
 smart_plug >> iot_dns / TLS()
 
 # Defining connections from the mobile application
-mobile_app >> udp_broadcast_2
-mobile_app >> udp_broadcast_3
-mobile_app >> udp_broadcast_4
 mobile_app >> any_host / DNS / ARP
 mobile_app >> smart_plub_tcp_port
 mobile_app >> tuya_1 / TLS
@@ -80,7 +81,6 @@ system.online_resource("privacy-policy", url="https://aurdel.com/fi/en/privacy-p
 system.online_resource("cookie-policy", url="https://aurdel.com/fi/en/cookie-policy", keywords=[
     "cookie policy", "stored", "delete", "personal data", "expiry"
 ])
-
 # No security policy found
 
 # Define collected sensitive data
